@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<instant-run
+    abi="armeabi-v7a,armeabi"
+    api-level="23"
+    density="xhdpi"
+    format="8"
+    plugin-version="2.2.3"
+    timestamp="82555871382441"
+    token="7814201328757697364"
+    verifier="FIELD_TYPE_CHANGE" >
+
+    <task
+        name="javac"
+        duration="374" />
+    <task
+        name="instant-run-dex"
+        duration="0" />
+    <task
+        name="instant-run-transform"
+        duration="55" />
+    <task
+        name="verifier"
+        duration="10" />
+
+    <artifact
+        location="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
+        type="DEX" />
+
+    <build
+        timestamp="82334448487634"
+        verifier="FULL_BUILD_REQUESTED" >
+        <artifact
+            location="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/outputs/apk/app-debug.apk"
+            type="MAIN" />
+    </build>
+    <build
+        timestamp="82555871382441"
+        verifier="FIELD_TYPE_CHANGE" >
+        <artifact
+            location="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_0/classes.dex"
+            type="DEX" />
+    </build>
+
+</instant-run>

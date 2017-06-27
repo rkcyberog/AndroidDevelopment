@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="ee4794c89465e36784afca7b4a567d487f5c633c">
+        <dex dex="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_d8fbb37f6d70eb9d0e242f2e44403da564c776a5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="6e3578f92f7462d1a935a1d36173e3bdd1234976">
+        <dex dex="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.2.0_987af1a3b3bd72b88349f4420734a5aab09785c0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="8c108c22c99e794eff255bb34d2a461200c4cbb0">
+        <dex dex="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.2.0_16d69b99b8bdc25a8e50109850b490a1a913af4d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="e5f32fa48a3eb2de0c987025c11b6e3864b634d9">
+        <dex dex="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.2.0_8d678793501479b546e043ce7f1bea954d184186/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="292a9fa091757208efa65e77eef63088247e51f3">
+        <dex dex="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.2.0_1cbc3ced4de84ced0c3ec713499f792cea97ef94/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="8dacd401940b3d682836b8e23f8a836d4eb44630">
+        <dex dex="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_590edb7ff8d7a83ea9285bddb086e76fb1616278/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.0/jars/libs/internal_impl-23.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="6e239441500605809818997dd63b62a947195f8c">
+        <dex dex="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.2.0_d149473c03f995bc547701164ef71121873cf90d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rahulkumar/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.4.0/f36d2d4e3a36b3259aaf9d004d29b4cdc6c1bfb2/picasso-2.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="f36d2d4e3a36b3259aaf9d004d29b4cdc6c1bfb2">
+        <dex dex="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/transforms/dex/debug/folders/1000/10/picasso-2.4.0_776a03eb8a7cd3195d7e6a3fb05160f2e482e0f2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/exploded-aar/com.mcxiaoke.volley/library-aar/1.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="e40b9a81989bd4a846018551c280f8c4d837bf2e">
+        <dex dex="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.mcxiaoke.volley-library-aar-1.0.0_45378f67b19c1bb07b8b0b861a8e0506a47c589d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rahulkumar/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.2.0/support-annotations-23.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="c5bf571bb10462bd90e5419ade67793f71acbc87">
+        <dex dex="/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.2.0_187edfd928ab444e27302fc3ef1b66e3238260d3/classes.dex" />
+    </item>
+
+</items>
