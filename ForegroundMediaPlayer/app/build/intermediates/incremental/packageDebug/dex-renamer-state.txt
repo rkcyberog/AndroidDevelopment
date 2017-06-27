@@ -1,0 +1,7 @@
+#Mon Jun 26 20:13:49 IST 2017
+base.0=/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_590edb7ff8d7a83ea9285bddb086e76fb1616278
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_d8fbb37f6d70eb9d0e242f2e44403da564c776a5/classes.dex
+base.1=/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_d8fbb37f6d70eb9d0e242f2e44403da564c776a5
+file.0=/Users/rahulkumar/Desktop/ForegroundMediaPlayer/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_590edb7ff8d7a83ea9285bddb086e76fb1616278/classes.dex
