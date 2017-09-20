@@ -1,0 +1,324 @@
+public interface XpressAPI
+{
+    HttpLoggingInterceptor logging = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC);
+    OkHttpClient.Builder httpClient = new OkHttpClient.Builder().addInterceptor(logging);
+
+
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(StaticInfo.SERVER_IP)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(httpClient.build())
+            .build();
+            
+    @GET(StaticInfo.SERVICE_ROOT+StaticInfo.FETCH_LOCATIONS)
+    Call<ArrayList<Area>> getLocations(@Query("hotel_id") String hotel_id, @Query("branch_id") String branch_id);
+    
+    }
+    
+    
+    
+    
+    
+    private void fetchLocations(String hotel_id, String branch_id) {
+        XpressAPI xp = XpressAPI.retrofit.create(XpressAPI.class);
+        Call<ArrayList<Area>> call = xp.getLocations(hotel_id, branch_id);
+        call.enqueue(new Callback<ArrayList<Area>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Area>> call, Response<ArrayList<Area>> response) {
+
+               /* area = response.body();
+                String areaName = area.get(0).area;
+                Log.i("area", areaName);
+                area = response.body();*/
+                area = response.body();
+               /* for(int i=0; i<area.size();i++) {
+                    String areaName = area.get(i).area;
+                    Log.i("area", areaName);
+
+                   // textArea.setText(area.get(i).area);
+                }*/
+                hmAdapter = new HomeDeliveryLocationAdapter(MinervaActivity.this, area);
+                listView.setAdapter(hmAdapter);
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Area>> call, Throwable t) {
+                Log.i("errorstore", "errorstore");
+            }
+        });
+    }
+    
+    
+     @Headers("Content-Type:application/json")
+    @POST(StaticInfo.SERVICE_ROOT+"postCustomerDetails")
+    Call<String> postCustomerDetails(@Body String s);
+    
+    
+public class MyDbHelper extends SQLiteOpenHelper {
+    public MyDbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, name, factory, version);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase sdb) {
+        /*
+            * list of products  :  category_id,category_name,product_id.product_name,model,price,desc
+            * cart :  _id,pid,pname,qty,price,total,
+            * order_master : order_id,total, payment_method , card_number
+            * order_txn : order_txn_id,order_id,product_id,name,model,qty,price,total
+         */
+
+        String sql1 = "create table "+StaticInfo.TBL_CAT+" (cid integer not null,cname text not null,image text,desc text,lid text)";
+
+        String sql2 = "create table "+StaticInfo.TBL_PRD+"(pid integer not null,cid integer not null,pname text not null,price real not null,tax real not null,desc text)";
+
+        /*String sql3 = "create table ord_master(oid integer primary key autoincrement,total real not null,pay_method text not null,card_no text,store integer not null)";
+
+
+*/
+        String sql5 = "create table "+StaticInfo.TBL_CART+"(_id integer primary key autoincrement,pid integer not null," +
+                "pname text not null,qty text not null,price text not null,total text not null,tax text not null," +
+                "cid integer,cname text,lid text,store_id integer not null)";
+
+        String sql3="create table "+StaticInfo.TBL_ADDR+" (_id integer primary key autoincrement,name text not null,address text not null," +
+                "lat text not null,lng text not null)";
+
+        String sql4 = "create table "+StaticInfo.TBL_PROD_INFO+"(_id integer primary key autoincrement,sid integer not null,sname text not null," +
+                "cid integer not null,cname text not null,pid integer not null,pname text not null,price real not null,tax real not null)";
+
+        sdb.execSQL(sql1);
+        sdb.execSQL(sql2);
+        sdb.execSQL(sql3);
+        sdb.execSQL(sql4);
+        sdb.execSQL(sql5);
+
+
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase sdb, int i, int i1) {
+
+    }
+
+    public void listCartData()
+    {
+        SQLiteDatabase sdb= getWritableDatabase();
+        Cursor c=sdb.query(StaticInfo.TBL_CART,null,null,null,null,null,null);
+        if(c.getCount()>0)
+        {
+            while (c.moveToNext())
+            {
+
+
+                StringBuilder sb=new StringBuilder();
+                sb.append(" " + c.getInt(0)+",");
+                sb.append(" " + c.getInt(1)+",");
+                sb.append(" " + c.getString(2)+",");
+                sb.append(" " + c.getString(3)+",");
+                sb.append(" " + c.getString(4)+",");
+                sb.append(" " + c.getString(5)+",");
+
+
+            }
+        }
+        else
+        {
+            ////Log.i("Tag","Cart is Empty");
+        }
+    }
+
+    public void clearCart() {
+        SQLiteDatabase sdb=getWritableDatabase();
+        sdb.delete(StaticInfo.TBL_CART,null,null);
+        sdb.close();
+    }
+
+    public int incrementQty(FragmentManager fm, ProductItem pi, String store_id)
+    {
+
+            ////Log.i("Tag", "IncrementQty called");
+            SQLiteDatabase sdb = getWritableDatabase();
+            Cursor c = sdb.query(StaticInfo.TBL_CART, null, "pid=" + pi.getProduct_id(), null, null, null, null);
+            c.moveToFirst();
+
+            if (c.getCount() > 0) {
+                c.moveToFirst();
+                ////Log.i("Tag","inc item count");
+                int x = Integer.parseInt(c.getString(c.getColumnIndex("qty")));
+
+                if (x > 0 && x < 30) {
+                    x++;
+                    ContentValues cv = new ContentValues();
+                    cv.put("qty", x);
+                    cv.put("total", getTotal(pi.getPrice(), pi.getTax(), pi.getQuantity()));
+                    ////Log.i("Tag", "update product : " + pi.getProduct_id() + " -  " + "");
+                    sdb.update(StaticInfo.TBL_CART, cv, "pid=" + pi.getProduct_id(), null);
+                }
+            } else {
+
+               // //Log.i("Tag","add new item");
+                ContentValues cv = new ContentValues();
+                cv.put("pid", pi.getProduct_id());
+                cv.put("pname", pi.getName());
+                cv.put("qty", pi.getQuantity());
+                cv.put("price", pi.getPrice());
+                cv.put("tax", pi.getTax());
+                cv.put("total", getTotal(pi.getPrice(), pi.getTax(), pi.getQuantity()));
+                cv.put("cid", pi.getCategory_id());
+                cv.put("store_id", store_id);
+                ////Log.i("Tag", "insert product : " + pi.getProduct_id() + " -  " + "");
+
+                sdb.insert(StaticInfo.TBL_CART, null, cv);
+
+            }
+
+            //Cursor cur = sdb.query(StaticInfo.TBL_CART, null, null, null, null, null, null);
+            ////Log.i("Tag", "MyDbHelper(132) - cart count : " + cur.getCount());
+            //cur.close();
+        ((XpressMenuFragment)fm.findFragmentByTag("xpr_menu")).updateCartCount();
+
+            c.close();
+            sdb.close();
+
+            return x;
+    }
+
+    private String getTotal(Double p, Double t, int q) {
+        String total="";
+
+        total= StaticInfo.df2.format((p*q)+((p*q)*(t/100)));
+
+
+
+        return total;
+    }
+
+    public int decrementQty(FragmentManager fm, int pid) {
+        SQLiteDatabase sdb=getWritableDatabase();
+        Cursor c=sdb.query(StaticInfo.TBL_CART,null,"pid="+pid,null,null,null,null);
+        if(c.getCount()>0)
+        {
+            c.moveToFirst();
+            int x = Integer.parseInt(c.getString(c.getColumnIndex("qty")));
+            double price=Double.parseDouble(c.getString(c.getColumnIndex("price")));
+
+            if (x > 1) {
+                x--;
+                ContentValues cv = new ContentValues();
+                cv.put("qty", x);
+                cv.put("total",StaticInfo.df2.format(price*x));
+                sdb.update(StaticInfo.TBL_CART, cv, "pid=" + pid, null);
+
+
+            } else {
+                sdb.delete(StaticInfo.TBL_CART, "pid=" + pid, null);
+                x = 0;
+            }
+        }
+
+        ((XpressMenuFragment)fm.findFragmentByTag("xpr_menu")).updateCartCount();
+        c.close();
+        sdb.close();
+
+        return x;
+    }
+
+
+    public int getRecordCount(String table) {
+        SQLiteDatabase sdb=getReadableDatabase();
+        Cursor c=sdb.query(table,new String[] {"pid"},null,null,null,null,null);
+        ////Log.i("dbg","cart size : "+c.getCount());
+        if(c!=null)
+            return c.getCount();
+        else
+            return 0;
+    }
+
+    public  boolean isCartEmpty()
+    {
+        SQLiteDatabase sdb = getWritableDatabase();
+        Cursor c=sdb.query(StaticInfo.TBL_CART,null,null,null,null,null,null);
+        int x=c.getCount();
+        c.close();
+        sdb.close();
+
+        if(x>0)
+            return false;
+        else
+            return true;
+    }
+
+    public int isCartMax(){
+        SQLiteDatabase sdb = getWritableDatabase();
+        Cursor c=sdb.query(StaticInfo.TBL_CART,null,null,null,null,null,null);
+        int x=c.getCount();
+        c.close();
+        sdb.close();
+
+        if(x<20)
+            return x;
+        else
+            return -1;
+    }
+
+    public int listTableContents(String table) {
+
+        SQLiteDatabase sdb=getReadableDatabase();
+        Cursor c=sdb.query(table,null,null,null,null,null,null);
+        ////Log.i("Tag","****************************************");
+        ////Log.i("Tag",table);
+        ////Log.i("Tag","****************************************");
+        while(c.moveToNext()) {
+            StringBuilder row=new StringBuilder();
+            int cols=c.getColumnCount();
+            for(int i=0;i<cols;i++) {
+                if(i<cols-1)
+                    row.append(c.getString(i)+",");
+                else
+                    row.append(c.getString(i));
+
+            }
+            ////Log.i("Tag",row.toString());
+        }
+        ////Log.i("Tag","****************************************");
+
+        return 0;
+    }
+
+    public boolean isAddressBookEmpty()
+    {
+         SQLiteDatabase sdb=getReadableDatabase();
+         Cursor c=sdb.query(StaticInfo.TBL_ADDR,new String[] {"_id"},null,null,null,null,null);
+         if(c.getCount()>0)
+         {
+             c.close();
+             return false;
+         }
+         else
+         {
+             c.close();
+             return true;
+         }
+    }
+
+    public ArrayList<SavedAddr> getSavedAddresses() {
+
+        ArrayList<SavedAddr> addrs=new ArrayList<>();
+        SQLiteDatabase sdb=getReadableDatabase();
+        Cursor c=sdb.query(StaticInfo.TBL_ADDR,null,null,null,null,null,null);
+
+        while(c.moveToNext()) {
+            SavedAddr sa=new SavedAddr();
+            sa.id=c.getInt(c.getColumnIndex("_id"));
+            sa.name=c.getString(c.getColumnIndex("name"));
+            sa.addr=c.getString(c.getColumnIndex("address"));
+            sa.lat=Double.parseDouble(c.getString(c.getColumnIndex("lat")));
+            sa.lng=Double.parseDouble(c.getString(c.getColumnIndex("lng")));
+            addrs.add(sa);
+        }
+
+        return addrs;
+    }
+}
